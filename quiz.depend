@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1573325277 source:c:\users\drozdom0\desktop\cpp\quiz\main.cpp
+	<cstdlib>
+	<ctime>
+	<iostream>
+
