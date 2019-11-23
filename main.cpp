@@ -4,25 +4,26 @@
 #include <algorithm>
 
 class Question {
-    friend void print(const Question &q);
+    friend std::ostream &operator <<(std::ostream &s, const Question &q);
     friend bool equal(const Question &q1, const Question &q2);
 public:
     static Question draw();
     Question();
     Question(int a, int b);
-    int solution() const;
+    int operator()() const;
 private:
     int a, b; };
 
-void print(const Question &q) {
-    std::cout << q.a << " " << q.b << " "; }
+std::ostream &operator<<(std::ostream &s, const Question &q) {
+   return s << q.a << " " << q.b << " ";
+    }
 
 bool equal(const Question &q1, const Question &q2) {
     return q1.a == q2.a && q1.b == q2.b ||
            q1.a == q2.b && q1.b == q2.a; }
 
 bool operator <(const Question &q1, const Question &q2){
-return q1.solution() < q2.solution();
+return q1() < q2();
 }
 Question Question::draw() {
     return Question(1 + std::rand() % 10, 1 + std::rand() % 10); }
@@ -31,7 +32,7 @@ Question::Question(): a(), b() {}
 
 Question::Question(int a, int b): a(a), b(b) {}
 
-int Question::solution() const {
+int Question::operator()() const {
     return a * b; }
 
 int main() {
@@ -49,6 +50,6 @@ int main() {
     for (int i = 0; i < 10; ++i) {
         int u;
         do {
-            print(qs[i]);
+            std::cout << qs[i];
             std::cin >> u; }
-        while (u != qs[i].solution()); }}
+        while (u != qs[i]()); }}
